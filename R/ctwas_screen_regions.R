@@ -162,7 +162,8 @@ screen_regions <- function(region_data,
     loginfo("Selected %d regions with L >= %d", length(screened_region_data), min_L)
     screened_region_L <- all_estimated_L[screened_region_ids]
     idx <- match(names(all_estimated_L), screen_summary$region_id)
-    screen_summary$L[idx] <- all_estimated_L
+    valid_idx <- !is.na(idx)
+    screen_summary$L[idx[valid_idx]] <- all_estimated_L[valid_idx]
   } else {
     loginfo("L = %d", L)
     screened_region_data <- region_data
